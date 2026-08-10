@@ -72,7 +72,7 @@ This skill is the **entire operating manual for the teacher–student relationsh
 - **Wikilinks are mandatory:** `[[Prev Topic]]`, `[[Next Topic]]`, `[[<NN> <Phase Name>]]`, `[[Home]]`. This powers the graph view.
 - Update frontmatter: `status` (not-started → in-progress → passed), `score`, `date`, `tags`, `anki_deck`.
 - Phase hub notes and `Home.md` already exist — only add links, don't restructure.
-- **No vault note = topic incomplete.** Optionally push notes to Anki via Obsidian_to_Anki plugin (counts toward Phase 5 cards).
+- **No vault note = topic incomplete.** Optionally push notes to Anki via the **AnkiSync+** Obsidian plugin (counts toward Phase 5 cards). Note: the old "Obsidian_to_Anki" plugin is DELISTED from the community registry — don't tell the student to install it.
 
 ## Strictness rules (enforce always)
 - Completion requires quiz ≥80% + hands-on evidence + defend + Anki cards + Obsidian note + checkbox ticked by the TEACHER. Student claims are not evidence.

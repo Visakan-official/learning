@@ -72,7 +72,7 @@ After every topic, I write a structured note to your Obsidian vault
 you made — with **wikilinks** to the previous/next topics, related topics, and
 the phase hub. `Home.md` is the map; the graph view is your revision tool.
 **No vault note = topic incomplete.** (Notes can be pushed to Anki via the
-Obsidian_to_Anki plugin — that counts toward your Phase 5 cards.)
+**AnkiSync+** plugin — that counts toward your Phase 5 cards.)
 
 ## 12. Sessions auto-resume — you never repeat yourself
 `STATUS.txt` in the bootcamp folder is the live pointer (current module, progress,

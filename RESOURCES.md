@@ -121,7 +121,7 @@ Videos are for concepts you can't grok from text. Don't binge — learn, then DO
 | Day 0 | AWS account + CLI | The cloud lab |
 | Day 0 | VS Code + WSL ext | Editor |
 | Day 0 | Anki + AnkiConnect + Anki MCP add-on | SRS (already done ✅) |
-| Day 0 | Obsidian + Obsidian_to_Anki plugin | Vault + card bridge |
+| Day 0 | Obsidian + AnkiSync+ plugin | Vault + card bridge |
 | Phase 2 | Docker Desktop (WSL2 backend) | Containers |
 | Phase 2 | minikube or K3s (in WSL2) | K8s lab |
 | Phase 3 | Terraform, Ansible | IaC |

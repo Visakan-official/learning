@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mira's DevOps Bootcamp Dashboard</title>
+<style>
+* { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0d1117; color: #c9d1d9; padding: 2rem; }
+.container { max-width: 1000px; margin: 0 auto; }
+h1 { color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; }
+.sub { color: #8b949e; margin: 0.5rem 0 1.5rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+.stat-card { background: #161b22; padding: 1.5rem; border-radius: 8px; border: 1px solid #30363d; text-align: center; }
+.stat-card h3 { color: #8b949e; font-weight: 400; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.stat-card .value { font-size: 2.2rem; font-weight: 700; color: #f0f6fc; margin-top: 0.5rem; }
+.progress-bar { background: #30363d; height: 2rem; border-radius: 1rem; overflow: hidden; margin: 1.5rem 0; }
+.progress-fill { background: linear-gradient(90deg, #238636, #2ea043); height: 100%; width: 0%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; }
+.module-list { background: #161b22; border-radius: 8px; border: 1px solid #30363d; overflow: hidden; margin: 1.5rem 0; }
+.module-item { display: flex; justify-content: space-between; padding: 0.6rem 1.5rem; border-bottom: 1px solid #21262d; }
+.module-item:last-child { border-bottom: none; }
+.module-item .status { font-weight: 700; }
+.done { color: #3fb950; } .pending { color: #f0883e; }
+.status-box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; white-space: pre-wrap; font-family: Consolas, monospace; font-size: 0.85rem; }
+.footer { margin-top: 2rem; color: #8b949e; font-size: 0.85rem; text-align: center; border-top: 1px solid #30363d; padding-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>🚀 Mira's DevOps Bootcamp — Progress Dashboard</h1>
+    <p class="sub">Student: Visakan · Teacher: Mira · Last updated: 2026-08-10 16:10 · Anki: 🟢 live</p>
+
+    <div class="stats-grid">
+        <div class="stat-card"><h3>Topics Completed</h3><div class="value">0/144</div></div>
+        <div class="stat-card"><h3>Overall Progress</h3><div class="value">0%</div></div>
+        <div class="stat-card"><h3>Anki Flashcards</h3><div class="value">0</div></div>
+        <div class="stat-card"><h3>Due Today</h3><div class="value">0</div></div>
+        <div class="stat-card"><h3>Status</h3><div class="value" style="font-size:1.1rem;">⚡ Just Started</div></div>
+    </div>
+
+    <div class="progress-bar"><div class="progress-fill" style="width:0%;">0%</div></div>
+
+    <h2 style="margin:1.5rem 0 0.5rem;">📚 Topic Roadmap</h2>
+    <div class="module-list">
+        <div style="display:flex; justify-content:space-between; padding:0.5rem 1.5rem; background:#0d1117; font-weight:600; color:#8b949e; border-bottom:2px solid #30363d;">
+            <span>Topic</span><span>Status</span>
+        </div>
+        <div class="module-item"><span>Filesystem layout, navigation, file ops (`ls`, `find`, `cp`, `mv`, `ln`)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Permissions & ownership (chmod/chown, umask, setuid/setgid/sticky), users/groups</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Processes: ps, top/htop, kill, signals, jobs, nohup, systemd (units, journalctl)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Text tools: grep, sed, awk, sort, uniq, cut, wc, xargs, pipes & redirection</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Network tools: curl, wget, ss/netstat, ping, dig/nslookup, nc</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Package management (apt), cron & systemd timers, environment variables</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Bash scripting:** variables, conditionals, loops, functions, exit codes, error handling</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab 0.1:** Write a production-style backup script (log rotation + notify on failure), commit to journal</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab 0.2:** Linux troubleshooting drill — you're handed a broken box, you diagnose it</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 0.1 ≥80%** + Defend: 10 interview Qs</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Recall:** 5+ Anki cards 🗂️ `mira::0-foundations/linux` · Obsidian note</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>OSI model (focus 4/7), TCP vs UDP, ports, 3-way handshake</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>IP addressing, subnets/CIDR basics, private vs public IPs, NAT concept</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>DNS: resolution flow, record types (A, AAAA, CNAME, MX, TXT, NS), dig drills</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>HTTP/HTTPS: methods, status codes (1xx–5xx), headers, cookies, TLS handshake</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Proxies, reverse proxies, load balancer concept (why LB? health checks?)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 0.2 ≥80%**</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Recall:** 5+ Anki cards 🗂️ `mira::0-foundations/networking` · Obsidian note</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Repos, commits, staging, `.gitignore`, diff, log, blame</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Branching: create/merge/delete, merge vs rebase, conflict resolution</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>undo: checkout, revert, reset (soft/mixed/hard), stash, cherry-pick</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Remotes: fetch/pull/push, tags, releases</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>GitHub workflow: fork → branch → PR → review → merge; conventional commits</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab 0.3:** Restructure THIS repo via a feature branch + PR (practice on real work)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 0.3 ≥80%**</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Recall:** 5+ Anki cards 🗂️ `mira::0-foundations/git` · Obsidian note</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Users, groups, roles, policies (JSON), policy evaluation logic</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Least privilege, MFA, access keys best practices, trust policies</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Create admin user, MFA, billing alarm, AWS CLI + credentials, s3 bucket policy</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/iam`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>AMIs, instance types & families, pricing models (on-demand, reserved, spot)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Key pairs, security groups (stateful, default rules), user-data scripts</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>EBS: volumes, snapshots, AMI creation, instance store vs EBS, gp3/io1</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Launch hardened web server via user-data, snapshot + restore drill</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/ec2-ebs`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>CIDR design, subnets (public/private), route tables, IGW, NAT gateway/instance</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Security groups vs NACLs (stateless vs stateful — exam favourite), VPC peering, endpoints, bastion hosts</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Build a full VPC: 2 AZs, public+private subnets, NAT, ALB in public, app in private, RDS in db subnet — ALL from console first, then documented</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.3 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::1-aws/vpc`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Buckets, objects, keys, storage classes, lifecycle policies, versioning</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Static website hosting, CORS, presigned URLs, S3 vs EBS vs EFS</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Security: bucket policies, ACLs vs policies, encryption (SSE-S3/KMS), MFA delete</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Static site on S3 + versioning + lifecycle + presigned URL script</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.4 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/s3`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>ALB vs NLB vs CLB, target groups, listeners, health checks, stickiness</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>ASG: launch templates, scaling policies, cooldowns, lifecycle hooks</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Route 53: hosted zones, routing policies (simple, weighted, latency, failover), alias vs CNAME</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** ALB + ASG serving a stress-testable app; simulate AZ failure, watch it recover</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.5 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/elb-asg-r53`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>RDS: engines, Multi-AZ, read replicas, backups, parameter groups, aurora mention</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>DynamoDB: tables, partition keys, RCU/WCU vs on-demand, indexes (GSI/LSI), DAX mention</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>CloudWatch: metrics, alarms, logs, log groups, agent, unified agent</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** RDS + app connecting via SG rules; CloudWatch alarm that pages you</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.6 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/rds-ddb-cw`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Lambda: runtime, triggers, layers, env vars, timeout/memory, cold starts, IAM role</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>API Gateway: REST vs HTTP, stages, throttling</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>EventBridge, SQS/SNS basics</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** "Image resize on upload" — S3 → Lambda → S3, plus EventBridge cron Lambda</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 1.7 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/serverless`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Images vs containers vs layers; Dockerfile (FROM, RUN, COPY, CMD, ENTRYPOINT, EXPOSE)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Image build cache, multi-stage builds, .dockerignore</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>run/exec/ps/logs/rm/rmi, port publishing, env vars, healthchecks</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Containerize a real app (node or python) with multi-stage build, run it, inspect it</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 2.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/docker`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Named volumes vs bind mounts, tmpfs</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Bridge vs host vs none networks, container-to-container DNS</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Docker Compose: services, networks, volumes, depends_on, env files, profiles</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Full-stack compose: app + postgres + redis + nginx reverse proxy, all wired</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 2.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/compose`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Docker Hub, ECR (AWS), tagging, `docker login`, pull policies</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Image scanning (Trivy), distroless/scratch, least-privilege users in images</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Push to ECR from local, scan images, fix high-CVEs</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 2.3 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/registries`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Architecture: control plane (API server, etcd, scheduler, controller manager) vs nodes (kubelet, kube-proxy, container runtime)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Pods, ReplicaSets, Deployments (rolling updates, rollbacks, strategy types)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Services (ClusterIP, NodePort, LoadBalancer), Endpoints, DNS</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>ConfigMaps & Secrets, namespaces, labels & selectors</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Deploy app on minikube/K3s: Deployment + Service + ConfigMap + Secret, scale it, roll it back</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 2.4 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/k8s-core`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Ingress & Ingress controllers (nginx), TLS</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Storage: PV/PVC, storage classes</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Probes: liveness/readiness/startup; resource requests/limits; HPA</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>kubectl power: get/describe/logs/exec/port-forward/apply vs create, `-o yaml`, `--dry-run`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Troubleshooting drill: crashloop, image pull backoff, pending pods, node not ready</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** nginx-ingress + cert, HPA under load (hey/wrk), survive a node drain</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 2.5 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::2-containers/k8s-intermediate`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Charts, values, templates, release lifecycle (upgrade/rollback), repo add/install</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Deploy app via Helm chart, override values, rollback</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 2.6 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/helm`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>HCL syntax, providers, resources, data sources, variables, outputs, locals</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>`init / plan / apply / destroy` lifecycle, state file & state locking</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Rebuild your Phase-1 VPC with Terraform (this is the skill interviewers demand)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 3.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::3-iac/terraform-core`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Why remote state, S3 backend + DynamoDB locking, state commands, `terraform import`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Workspaces, modules (input/output), functions, `for_each` vs `count`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Remote state with locking, extract a reusable VPC module, destroy everything cleanly</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 3.2 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::3-iac/terraform-state`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Inventory, playbooks, modules, handlers, roles; ad-hoc commands</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Configure EC2 instances with Ansible (nginx + app deploy), idempotency proof</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 3.3 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::3-iac/ansible`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Template anatomy, stack lifecycle; Terraform vs CloudFormation comparison (interview classic)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 3.4 ≥80%** (short) · **Recall:** 3+ cards 🗂️ `mira::3-iac/cloudformation`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>CI vs CD vs CDE; pipeline stages; artifacts; environments (dev/stage/prod); gating</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 4.1 ≥80%** (short, conceptual) · **Recall:** 3+ cards 🗂️ `mira::4-cicd/concepts`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Workflows: events, jobs, steps, runners, matrix, caching, artifacts, environments</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Secrets & variables, OIDC to AWS (no long-lived keys!), concurrency, reusable workflows</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** CI (lint→test→build→scan→push ECR) + CD (deploy to EC2/ECS) with OIDC</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 4.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::4-cicd/gh-actions`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Pipeline as code (declarative), agents, stages, plugins, credentials</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Same pipeline in Jenkins against a local agent</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 4.3 ≥80%** (awareness level) · **Recall:** 3+ cards 🗂️ `mira::4-cicd/jenkins`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>GitOps principles, ArgoCD app of apps, sync policies, drift detection</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** ArgoCD on minikube: app deploys from Git, revert = git revert</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 4.4 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::4-cicd/gitops`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Metrics model, exporters, service discovery, PromQL basics, alerting (Alertmanager)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Grafana dashboards, data sources, annotations</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Monitor the Phase-2 cluster: node/app metrics, custom dashboard, alert fires</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 5.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::5-observability/prometheus`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Log aggregation concepts; ELK/OpenSearch (ingest, index, search) or Loki; EFK on k8s</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>AWS: CloudWatch Logs, Log Insights, S3 log archival</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Centralize app logs, search them, alert on error pattern</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 5.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::5-observability/logging`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Distributed tracing (Jaeger/Tempo), OpenTelemetry, golden signals, SLI/SLO/SLA</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 5.3 ≥80%** (short) · **Recall:** 3+ cards 🗂️ `mira::5-observability/tracing`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>ECS: task definitions, Fargate vs EC2, service autoscaling, ECS vs EKS decision</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>EKS: managed control plane, node groups, IAM roles for pods, spot nodes</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Lab:** Deploy containerized app to ECS Fargate with ALB; repeat on EKS (minikube skills transfer)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 6.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/ecs-eks`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>AWS Secrets Manager vs SSM Parameter Store, KMS (CMK vs AWS-managed)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>DevSecOps: SAST (Semgrep/SonarQube), dependency scan (OWASP), container scan (Trivy) in pipeline, SBOM</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 6.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/security`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>6 pillars (operational excellence, security, reliability, performance, cost, sustainability)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Cost: savings plans, spot, rightsizing, S3 lifecycle, billing alerts; FinOps basics</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 6.3 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::6-advanced/cost`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Design a scalable app architecture on AWS (diagram + reasoning: VPC, multi-AZ, ASG, caching, CDN, DB tier)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>Migration patterns (lift-and-shift, re-platform, re-architect)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Quiz 6.4 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/design`</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Question bank:** 200+ questions across ALL modules — drilled via spaced repetition (Anki) until 90%+ hit rate</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Mock interviews:** 5 full-length mocks (45 min each): Linux/git, Docker/K8s, AWS, CI/CD+IaC, mixed senior panel</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Scenario rounds:** "Your app is slow / down / leaking secrets — what do you do?" diagnosis drills</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Behavioral:** STAR answers, "tell me about a time you broke prod", ownership stories (use real journal/project incidents)</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Resume + portfolio:** finalize 4 projects with READMEs, diagrams, and a live demo URL</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Salary/negotiation prep:** local/remote market rates for 1–2 yr DevOps</span><span class="status pending">⏳ Pending</span></div>
+        <div class="module-item"><span>**Capstone review:** full walkthrough of every project, every decision defended</span><span class="status pending">⏳ Pending</span></div>
+    </div>
+
+    <h2 style="margin:1.5rem 0 0.5rem;">🧭 Current Status</h2>
+    <div class="status-box"># STATUS — live resume pointer
+# Updated by Mira after EVERY topic. Read FIRST at session start.
+# Never rely on chat memory — the files are the memory.
+
+LAST UPDATED : 2026-08-10 (bootcamp initialized — v1.3.0)
+CURRENT PHASE: 0 — Foundations
+CURRENT MODULE: M0.1 — Linux Fundamentals
+CURRENT TOPIC : (none yet — Day 0 pending)
+NEXT ACTION   : Student accepts RULES.md, then Day 0: WSL2 + AWS account hygiene + billing alarm
+PENDING       : -
+BLOCKERS      : -</div>
+    <div class="footer">
+        Built automatically by Mira (Hermes Agent) · <a href="https://github.com/Visakan-official/learning" target="_blank" style="color:#58a6ff;">View on GitHub</a>
+    </div>
+</div>
+</body>
+</html>

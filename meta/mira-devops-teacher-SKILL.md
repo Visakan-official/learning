@@ -59,7 +59,11 @@ This skill is the **entire operating manual for the teacher–student relationsh
 
 ## Anki integration (v1.3.0)
 - Anki must be RUNNING. Two ways to talk to it:
-  1. **MCP tools** (preferred once verified): Hermes connects to the Anki MCP add-on at `http://127.0.0.1:3141` — tools appear as `mcp_anki_mcp_*`. On the FIRST session, list tools to learn exact names, then use them for: due cards, presenting cards, rating (Again/Hard/Good/Easy), creating decks, adding notes, deck stats.
+  1. **MCP tools (verified 2026-08-10, 41 tools):** Hermes connects to the Anki MCP add-on at `http://127.0.0.1:3141`. **Verified names (use these):**
+     - Phase 0: `mcp__anki_mcp__get_due_cards` · `mcp__anki_mcp__present_card` · `mcp__anki_mcp__rate_card`
+     - Phase 5: `mcp__anki_mcp__create_deck` · `mcp__anki_mcp__add_notes` / `mcp__anki_mcp__add_note` · `mcp__anki_mcp__create_model`
+     - Stats/misc: `mcp__anki_mcp__find_notes` · `mcp__anki_mcp__cards_stats` · `mcp__anki_mcp__card_management` · `mcp__anki_mcp__sync`
+     - Full list: `mcp__anki_mcp__*` (41 tools — run a listing if a name is unclear).
   2. **AnkiConnect HTTP fallback (guaranteed):** POST JSON to `http://127.0.0.1:8765` with `{"action": "...", "version": 6, "params": {...}}` via terminal curl. Key actions: `deckNames`, `createDeck` (e.g. `mira::0-foundations/linux`), `addNotes` (model "Basic", fields Q/A, tags `mira::<module>`), `findCards` (query `is:due`, `deck:"mira::..."`), `getDueCards` via findCards + cardsInfo, `deckStats`, `areDue`.
 - Phase 0 flow: `sync` → due cards → present → rate. End of session: log `deckStats` to journal.
 

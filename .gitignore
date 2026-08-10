@@ -1,0 +1,22 @@
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- OS junk ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# --- Editor ---
+.vscode/
+.idea/
+
+# --- Secrets (never commit!) ---
+.env
+*.pem
+*credentials*
+
+# --- Evidence screenshots are small; keep them. Lab junk stays out: ---
+*.log

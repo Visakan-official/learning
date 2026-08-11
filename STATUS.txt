@@ -2,10 +2,10 @@
 # Updated by Mira after EVERY topic. Read FIRST at session start.
 # Never rely on chat memory — the files are the memory.
 
-LAST UPDATED : 2026-08-11 (Day 0 in progress)
+LAST UPDATED : 2026-08-11 (Day 0 COMPLETE)
 CURRENT PHASE: 0 — Foundations
 CURRENT MODULE: M0.1 — Linux Fundamentals
-CURRENT TOPIC : (none yet — Day 0: setup)
-NEXT ACTION   : Day 0: WSL2 Ubuntu install → AWS account + IAM admin + MFA + billing alarm → gh auth
+CURRENT TOPIC : (none yet — next session starts M0.1)
+NEXT ACTION   : M0.1 Linux: filesystem layout, navigation, file ops (ls, find, cp, mv, ln) + permissions
 PENDING       : -
 BLOCKERS      : -

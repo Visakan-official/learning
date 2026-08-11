@@ -2,10 +2,10 @@
 # Updated by Mira after EVERY topic. Read FIRST at session start.
 # Never rely on chat memory — the files are the memory.
 
-LAST UPDATED : 2026-08-10 (bootcamp initialized — v1.3.0)
+LAST UPDATED : 2026-08-11 (Day 0 in progress)
 CURRENT PHASE: 0 — Foundations
 CURRENT MODULE: M0.1 — Linux Fundamentals
-CURRENT TOPIC : (none yet — Day 0 pending)
-NEXT ACTION   : Student accepts RULES.md, then Day 0: WSL2 + AWS account hygiene + billing alarm
+CURRENT TOPIC : (none yet — Day 0: setup)
+NEXT ACTION   : Day 0: WSL2 Ubuntu install → AWS account + IAM admin + MFA + billing alarm → gh auth
 PENDING       : -
 BLOCKERS      : -

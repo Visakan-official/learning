@@ -1,4 +1,4 @@
-# RULES — The Contract (v1.3.0)
+# RULES — The Contract (v1.4.0)
 
 You asked for a strict teacher. This is the contract. It binds **both** of us.
 Read it fully. Your first task is to confirm you accept it.
@@ -34,7 +34,8 @@ If you can't reproduce it, you didn't do it.
 
 ## 5. Hands-on is mandatory
 DevOps is a **practical** craft. Every module has a lab. You run the commands
-on your machine (WSL2 Ubuntu, AWS free tier, minikube, etc.). Watching videos
+on your machine (Omarchy 4.0.2 / Arch Linux — a native Linux host, no VM or WSL layer;
+AWS free tier, minikube, etc.). Watching videos
 is not learning; typing commands and breaking things is learning.
 
 ## 6. Cost discipline (non-negotiable, from Day 0)
@@ -68,7 +69,7 @@ can't explain is a project that doesn't exist in an interview.
 
 ## 11. Obsidian notes are mandatory (revision material)
 After every topic, I write a structured note to your Obsidian vault
-(`A:\Obsidian\Mira Bootcamp`): key concepts, real commands you ran, mistakes
+(`~/Documents/Obsidian/Mira Bootcamp`): key concepts, real commands you ran, mistakes
 you made — with **wikilinks** to the previous/next topics, related topics, and
 the phase hub. `Home.md` is the map; the graph view is your revision tool.
 **No vault note = topic incomplete.** (Notes can be pushed to Anki via the
@@ -88,7 +89,7 @@ and defended in the session. Bring back one good question + answer per module to
 the journal (it goes in the Anki deck too).
 
 ## 14. Session closure is mandatory (dashboard)
-Every session ends with: journal entry (Rule 7) → run `python scripts\build_dashboard.py`
+Every session ends with: journal entry (Rule 7) → run `python3 scripts/build_dashboard.py`
 → `git add -A` → commit → push. The dashboard at
 https://visakan-official.github.io/learning/ is our shared progress meter.
 **No push = session didn't fully count.** (I run this; you watch and verify.)

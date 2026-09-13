@@ -114,16 +114,28 @@ Videos are for concepts you can't grok from text. Don't binge — learn, then DO
 
 ---
 
+## Linux host notes — Omarchy / Arch (v1.4.0)
+
+| Thing | On this box |
+|---|---|
+| Package manager | `pacman -S <pkg>` · AUR via `yay -S <pkg>` · search `pacman -Ss`, update `sudo pacman -Syu` |
+| AWS CLI v2 | Installed via **official bundle** → `~/.local/aws-cli/v2/current/bin/aws`, symlinked at `~/.local/bin/aws` (no sudo). Repair: `curl -sS https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip && unzip -q /tmp/awscliv2.zip -d /tmp && /tmp/aws/install -i ~/.local/aws-cli -b ~/.local/bin --update` |
+| AWS credentials | `~/.aws/config` + `~/.aws/credentials`, `chmod 700 ~/.aws && chmod 600 ~/.aws/*`. Verify: `aws sts get-caller-identity` |
+| Python | System python is **externally managed (PEP 668)** — system-wide `pip install` fails. Use `python3 -m venv .venv` or stdlib-only scripts |
+| Anki | Native package (`/usr/bin/anki`) + **AnkiConnect add-on (2055492159)** on `127.0.0.1:8765` + **Anki MCP add-on** on `127.0.0.1:3141`. Both must be running for Phase 0 / Phase 5 |
+| Obsidian | Vault at `~/Documents/Obsidian/Mira Bootcamp`, plugin `anki-sync-plus` |
+| Repo | `~/Ai-assisted-learning` → `github.com/Visakan-official/learning` (public), dashboard → GitHub Pages `docs/` |
+
 ## Tools you'll install (timeline)
 | Week | Tool | Why |
 |---|---|---|
-| Day 0 | WSL2 + Ubuntu | Your Linux lab on Windows |
+| Day 0 | Omarchy 4.0.2 (Arch-based Linux) | Native Linux lab host — migrated off Windows 2026-09-13 |
 | Day 0 | AWS account + CLI | The cloud lab |
-| Day 0 | VS Code + WSL ext | Editor |
+| Day 0 | Editor (VS Code / Neovim / Zed) | Whatever you'll actually live in on Arch |
 | Day 0 | Anki + AnkiConnect + Anki MCP add-on | SRS (already done ✅) |
 | Day 0 | Obsidian + AnkiSync+ plugin | Vault + card bridge |
-| Phase 2 | Docker Desktop (WSL2 backend) | Containers |
-| Phase 2 | minikube or K3s (in WSL2) | K8s lab |
+| Phase 2 | Docker Engine + Compose (`pacman -S docker docker-compose`) | Containers, native Linux |
+| Phase 2 | minikube or K3s (native Linux) | K8s lab |
 | Phase 3 | Terraform, Ansible | IaC |
 | Phase 4 | Jenkins (local), ArgoCD (in cluster) | CI/CD |
 | Phase 5 | Prometheus, Grafana, Loki/OpenSearch | Observability |

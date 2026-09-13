@@ -15,7 +15,7 @@
 - [ ] Processes: ps, top/htop, kill, signals, jobs, nohup, systemd (units, journalctl)
 - [ ] Text tools: grep, sed, awk, sort, uniq, cut, wc, xargs, pipes & redirection
 - [ ] Network tools: curl, wget, ss/netstat, ping, dig/nslookup, nc
-- [ ] Package management (apt), cron & systemd timers, environment variables
+- [ ] Package management (**pacman/AUR** on Arch; know apt/yum conceptually for interviews), cron & systemd timers, environment variables
 - [ ] **Bash scripting:** variables, conditionals, loops, functions, exit codes, error handling
 - [ ] **Lab 0.1:** Write a production-style backup script (log rotation + notify on failure), commit to journal
 - [ ] **Lab 0.2:** Linux troubleshooting drill — you're handed a broken box, you diagnose it

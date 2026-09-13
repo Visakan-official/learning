@@ -1,10 +1,10 @@
-# 🚀 Mira's DevOps Bootcamp — v1.3.0
+# 🚀 Mira's DevOps Bootcamp — v1.4.0
 
 A strict, evidence-only, AI-taught AWS + DevOps bootcamp. One student (Visakan), one teacher (Mira — a Hermes Agent profile), one goal: **interview-ready for 1–2 year experienced DevOps Engineer roles.**
 
 > Built on the Learn → Do → Prove → Defend → **Recall** method, powered by Anki spaced repetition, an Obsidian knowledge vault, a NotebookLM study notebook, and a live GitHub Pages progress dashboard.
 
-## The system (v1.3.0)
+## The system (v1.4.0)
 
 | Component | What it does | Where |
 |---|---|---|
@@ -15,10 +15,14 @@ A strict, evidence-only, AI-taught AWS + DevOps bootcamp. One student (Visakan),
 | 🃏 **question-bank.md** | Missed-question queue (spaced repetition — mirrored in Anki) | `question-bank.md` |
 | 📓 **journal/** | Daily evidence log — every session must end here or it didn't count | `journal/YYYY-MM-DD.md` |
 | 🗂️ **Anki** | Flashcard SRS: Phase 0 = daily due-card review; Phase 5 = cards created for every completed topic | Anki desktop (AnkiConnect + Anki MCP add-on) |
-| 🧠 **Obsidian vault** | Revision notes per topic, wikilinked hub. No note = topic incomplete | `A:\Obsidian\Mira Bootcamp` |
+| 🧠 **Obsidian vault** | Revision notes per topic, wikilinked hub. No note = topic incomplete | `~/Documents/Obsidian/Mira Bootcamp` |
 | 🤖 **NotebookLM** | AI study partner — ask it the "why" questions, feed it RESOURCES + notes | notebooklm.google.com |
 | 📈 **Dashboard** | Auto-built progress page (modules, %, Anki stats) → GitHub Pages | `docs/` → https://visakan-official.github.io/learning/ |
-| 🔧 **scripts/build_dashboard.py** | Builds the dashboard; run at the end of EVERY session (Rule 14) | `scripts/` |
+| 🔧 **scripts/build_dashboard.py** | Builds the dashboard (stdlib-only, OS-portable); run at the end of EVERY session (Rule 14) | `scripts/` |
+
+**Lab host (v1.4.0 — 2026-09-13 migration):** Omarchy 4.0.2 (Arch-based Linux), user `vizack`, home `/home/vizack`.
+Bootcamp repo: `~/Ai-assisted-learning`. Obsidian vault: `~/Documents/Obsidian/Mira Bootcamp`. No WSL, no VM —
+commands run on bare Arch. Package manager: `pacman` (+ `yay` for AUR).
 
 ## Session flow (mandatory)
 
@@ -40,4 +44,4 @@ A strict, evidence-only, AI-taught AWS + DevOps bootcamp. One student (Visakan),
 
 ---
 
-*Curriculum structure adapted from a friend's bootcamp kit (v1.2.0), upgraded to v1.3.0 with Anki SRS, Obsidian↔Anki bridge, NotebookLM, and the live dashboard.*
+*Curriculum structure adapted from a friend's bootcamp kit (v1.2.0), upgraded to v1.3.0 with Anki SRS, Obsidian↔Anki bridge, NotebookLM, and the live dashboard. **v1.4.0 (2026-09-13):** host migrated Windows → Omarchy (Arch); repo moved to `~/Ai-assisted-learning`; dashboard script made OS-portable (`ROOT_PATH` auto-derived) and stdlib-only (PEP 668 safe).*

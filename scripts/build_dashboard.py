@@ -1,27 +1,28 @@
 #!/usr/bin/env python3
-"""Mira Bootcamp — dashboard builder v1.3.0 (HARDCODED for this machine).
+"""Mira Bootcamp — dashboard builder v1.4.0 (OS-portable: Linux/Omarchy + Windows).
 
 Reads ROADMAP.md + STATUS.txt, queries AnkiConnect (live), and writes docs/index.html
 for GitHub Pages. Run at the end of EVERY session (Rule 14).
 
-Requires: python + requests (`pip install requests`). Anki must be RUNNING with
-AnkiConnect enabled for live card stats (script degrades gracefully if not).
+Requires: python3 stdlib only (urllib) — no pip installs, safe under PEP 668.
+Anki must be RUNNING with AnkiConnect enabled for live card stats
+(script degrades gracefully if Anki is offline).
 
 Usage:
-    python scripts\\build_dashboard.py
+    python3 scripts/build_dashboard.py
 """
 import os
 import re
 import json
-import sys
+import urllib.request
 from datetime import datetime
 
-# --- HARDCODED FOR THIS MACHINE (set during setup — never ask again) ---
-ROOT_PATH = r"A:\Ai-assisted-learning"
+# --- AUTO-LOCATED (portable: repo root = parent dir of scripts/) ---
+ROOT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GITHUB_USERNAME = "Visakan-official"
 REPO_NAME = "learning"                      # → https://visakan-official.github.io/learning/
 ANKI_CONNECT_URL = "http://127.0.0.1:8765"  # AnkiConnect (FooSoft add-on 2055492159)
-# -----------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 OUTPUT_DIR = os.path.join(ROOT_PATH, "docs")
 ROADMAP_PATH = os.path.join(ROOT_PATH, "ROADMAP.md")
@@ -43,37 +44,36 @@ def parse_roadmap():
     return modules
 
 
+def _anki(action, **params):
+    """Minimal AnkiConnect client — stdlib only (no pip, PEP 668 safe)."""
+    payload = json.dumps({"action": action, "version": 6, "params": params}).encode()
+    req = urllib.request.Request(
+        ANKI_CONNECT_URL, data=payload, headers={"Content-Type": "application/json"}
+    )
+    with urllib.request.urlopen(req, timeout=3) as resp:
+        return json.loads(resp.read().decode()).get("result")
+
+
 def get_anki_stats():
     """Live stats from AnkiConnect. Returns zeros if Anki is down."""
     stats = {"total_cards": 0, "due_today": 0, "new_today": 0}
     try:
-        import requests
-        def call(action, **params):
-            r = requests.post(ANKI_CONNECT_URL,
-                              json={"action": action, "version": 6, "params": params},
-                              timeout=3)
-            r.raise_for_status()
-            return r.json().get("result")
-
-        decks = call("deckNamesAndIds") or {}
+        decks = _anki("deckNamesAndIds") or {}
         stats["decks"] = len(decks)
-        # Total cards across all decks
         try:
-            counts = call("getDeckStats", decks=decks) or {}
-            stats["total_cards"] = sum(d.get("new_count", 0) + d.get("learn_count", 0)
-                                       + d.get("review_count", 0)
-                                       for d in counts.values())
-        except Exception:
-            pass
-        # Due today: review + new
-        try:
-            due_ids = call("findCards", query="is:due") or []
-            stats["due_today"] = len(due_ids)
+            counts = _anki("getDeckStats", decks=decks) or {}
+            stats["total_cards"] = sum(
+                d.get("new_count", 0) + d.get("learn_count", 0) + d.get("review_count", 0)
+                for d in counts.values()
+            )
         except Exception:
             pass
         try:
-            new_ids = call("findCards", query="is:new") or []
-            stats["new_today"] = len(new_ids)
+            stats["due_today"] = len(_anki("findCards", query="is:due") or [])
+        except Exception:
+            pass
+        try:
+            stats["new_today"] = len(_anki("findCards", query="is:new") or [])
         except Exception:
             pass
     except Exception:
@@ -106,7 +106,7 @@ def build_html(modules, stats, status_text):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mira's DevOps Bootcamp Dashboard</title>
 <style>
-* {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; box-sizing: border-box; }}
+* {{ font-family: system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; box-sizing: border-box; }}
 body {{ background: #0d1117; color: #c9d1d9; padding: 2rem; }}
 .container {{ max-width: 1000px; margin: 0 auto; }}
 h1 {{ color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; }}
@@ -122,14 +122,14 @@ h1 {{ color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; 
 .module-item:last-child {{ border-bottom: none; }}
 .module-item .status {{ font-weight: 700; }}
 .done {{ color: #3fb950; }} .pending {{ color: #f0883e; }}
-.status-box {{ background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; white-space: pre-wrap; font-family: Consolas, monospace; font-size: 0.85rem; }}
+.status-box {{ background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; white-space: pre-wrap; font-family: ui-monospace, Consolas, monospace; font-size: 0.85rem; }}
 .footer {{ margin-top: 2rem; color: #8b949e; font-size: 0.85rem; text-align: center; border-top: 1px solid #30363d; padding-top: 1rem; }}
 </style>
 </head>
 <body>
 <div class="container">
     <h1>🚀 Mira's DevOps Bootcamp — Progress Dashboard</h1>
-    <p class="sub">Student: Visakan · Teacher: Mira · Last updated: {now} · Anki: {anki_state}</p>
+    <p class="sub">Student: Visakan · Teacher: Mira · Host: Omarchy (Arch) · Last updated: {now} · Anki: {anki_state}</p>
 
     <div class="stats-grid">
         <div class="stat-card"><h3>Topics Completed</h3><div class="value">{completion_count}/{total_count}</div></div>

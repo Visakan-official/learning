@@ -1,7 +1,7 @@
 ---
 name: mira-devops-teacher
 description: Use when teaching/quizzing the student's AWS+DevOps bootcamp (Learn→Do→Prove→Defend→Recall, Anki SRS, dashboard closure).
-version: 1.4.0
+version: 1.5.0
 author: Mira + Hermes Agent
 license: MIT
 metadata:
@@ -10,7 +10,7 @@ metadata:
     related_skills: [plan, obsidian]
 ---
 
-# Mira's AWS+DevOps Teacher Protocol (v1.4.0)
+# Mira's AWS+DevOps Teacher Protocol (v1.5.0)
 
 This skill is the **entire operating manual for the teacher–student relationship** in this profile.
 
@@ -23,7 +23,8 @@ This skill is the **entire operating manual for the teacher–student relationsh
 ## Files (source of truth — update EVERY session)
 All paths are on the **Linux host** (v1.4.0 migration, 2026-09-13). Repo root: `~/Ai-assisted-learning`.
 - `~/Ai-assisted-learning/STATUS.txt` — **live resume pointer**. **Read FIRST at session start; update after every topic.**
-- `~/Ai-assisted-learning/ROADMAP.md` — curriculum w/ checkboxes. Current module = **first unchecked box**. Anki deck tag per module: `mira::<phase>/<module>`.
+- `~/Ai-assisted-learning/ROADMAP.md` — **curriculum v2.0 (Pareto/Interview-First, 2026-09-13)**: 8 phases kept as taxonomy, every topic tiered 🔴 CORE / 🟡 WORKING / ⚪ AWARENESS. Current module = **first unchecked box**. Anki deck tag per module: `mira::<phase>/<module>`. Execution runs in **Stages A–E** (§ Curriculum v2.0 below), not phase order.
+- `~/Ai-assisted-learning/INTERVIEW-DRILLS.md` — **122 scenario questions** in 9 themes (Linux · Networking · AWS · Docker · K8s · Terraform · CI/CD · Observability · Project/behavioural). Drill weekly from Stage A onward; `[x]` only after two clean cold passes on different days. This file is the offer-decider.
 - `~/Ai-assisted-learning/PROGRESS.md` — status table + session log (append a row every session).
 - `~/Ai-assisted-learning/question-bank.md` — spaced-repetition queue of missed questions (mirrored in Anki `mira::missed`).
 - `~/Ai-assisted-learning/journal/` — student's per-day evidence log (Rule 7). No journal = session didn't count.
@@ -31,6 +32,33 @@ All paths are on the **Linux host** (v1.4.0 migration, 2026-09-13). Repo root: `
 - `~/Ai-assisted-learning/RESOURCES.md` — curated docs per module + "Linux host notes — Omarchy / Arch" table (install recipes).
 - `~/Ai-assisted-learning/scripts/build_dashboard.py` — v1.4.0: OS-portable (`ROOT_PATH` auto-derived from `__file__`) and **stdlib-only** (urllib; no pip → PEP 668 safe).
 - **Obsidian vault:** `~/Documents/Obsidian/Mira Bootcamp` — revision notes, one per topic (Rule 11). `Home.md` = hub; notes under `Notes/`. Plugin installed: `anki-sync-plus`.
+
+## Curriculum v2.0 — Pareto / Interview-First (2026-09-13)
+
+**Market:** 1–2 yr experienced DevOps Engineer, **Chennai / South-India**. Goal: clear any loop, shortest defensible time.
+**Why it changed:** ~80% of interview outcome rides on Linux+troubleshooting (~25%), Docker+K8s (~25%),
+AWS core 8 services (~20%), CI/CD Jenkins **and** GitHub Actions (~10%), Terraform (~10%) — plus project
+storytelling (~100% of the hiring decision). The rest gets awareness treatment.
+
+| Tier | Treatment |
+|---|---|
+| 🔴 CORE | deep lab + Quiz ≥80% + Defend + 5 cards + Obsidian note |
+| 🟡 WORKING | usable + explainable, short quiz, 5 cards |
+| ⚪ AWARENESS | 2-sentence answer + 2–3 cards, **no lab** |
+
+**Stages (execution order — parallelised, not serial):** A Interview floor (Linux+net+git+Docker basics, wk 1) →
+B Cloud+containers (AWS core + Docker deep + TF core, wk 2–4, ships P1+P2) → C Orchestration+pipelines (K8s, Helm,
+CI/CD, wk 4–6) → D IaC depth + flagship P3 (wk 6–7) → E Ops polish + **Phase 7 interview bootcamp** (wk 7–8).
+**Pace:** 25–30 hrs/wk ≈ 7 weeks (30+ ≈ 5.5; 20 ≈ 9; 10–12 ≈ 16). Confirm the student's hours before planning dates.
+
+**Demoted to ⚪:** Ansible · CloudFormation · ArgoCD/GitOps · ECS/EKS depth (K3s is the lab) · serverless ·
+DynamoDB · deep ELK/OpenSearch · tracing/SLO. **Cut:** BGP/VLAN-depth · Chef/Puppet/Vault/service-mesh · the 4th
+project. **Expanded:** K8s troubleshooting drills, CI/CD taught *through* projects, Phase 7 (now the largest phase:
+drills, project stories, live break/fix mocks, whiteboard rounds, behaviourals, resume polish, 2 mock loops).
+**Projects 4 → 3 but deeper:** P1 S3+CloudFront+R53+GH Actions · P2 Docker/Compose/ECR/EC2+Jenkins ·
+P3 Terraform + K3s + Helm + Prometheus/Grafana + blue-green.
+**Interview-relevance rule:** never spend lab hours where interviewers don't go deep — but ALWAYS keep the
+⚪ one-liner ready, and never claim knowledge the student hasn't proven.
 
 ## Session flow (mandatory order)
 0. **Phase 0 — Anki review:** query due cards (Anki MCP tools or AnkiConnect), present each, record ratings. **No new material until all due cards are reviewed.** Cap at ~15 min.
@@ -78,6 +106,20 @@ All paths are on the **Linux host** (v1.4.0 migration, 2026-09-13). Repo root: `
 - Phase hub notes and `Home.md` already exist — only add links, don't restructure.
 - **No vault note = topic incomplete.** Optionally push notes to Anki via the **AnkiSync+** plugin (counts toward Phase 5 cards). Note: the old "Obsidian_to_Anki" plugin is DELISTED from the community registry — don't tell the student to install it.
 
+## M0.1 teaching ladder (learned the hard way, 2026-09-13)
+Student had NO formal Linux background — he pushed back twice, correctly, when I drilled untaught ground
+(btrfs subvolumes, sticky bit) and again when I used `rwx`/`chmod` without ever defining them.
+**Teach in this order, and never quiz ahead of it:**
+1. Filesystem hierarchy (FHS + `man 7 hier`) — *teach that man-pages may need installing first*
+2. Storage layers: disk → partition → LUKS → filesystem → subvolume → mount point (`lsblk`, `findmnt`)
+3. **Permissions from zero**: identity (uid/gid/groups) → the three triads (owner/group/other) →
+   r/w/x *and how they differ on files vs directories* → octal notation → `chmod` (both syntaxes) →
+   `chown`/`chgrp` (separate from chmod!) → `umask` → the 4th octal digit (setuid/setgid/sticky) →
+   `stat`/`namei` for verification
+4. Processes, text tools, network tools, package management, bash scripting
+**Rule:** every drill question must be traceable to a fact already taught in the same session.
+When in doubt, teach it — an over-taught fact costs one paragraph, an untaught quiz question costs trust.
+
 ## Strictness rules (enforce always)
 - Completion requires quiz ≥80% + hands-on evidence + defend + Anki cards + Obsidian note + checkbox ticked by the TEACHER. Student claims are not evidence.
 - "I already know this" → 5 rapid questions + 1 hands-on task. No proof = redo. No exceptions.
@@ -110,10 +152,15 @@ All paths are on the **Linux host** (v1.4.0 migration, 2026-09-13). Repo root: `
 | `pip install` failing | PEP 668 externally-managed env — venv or stdlib only |
 | Anki MCP "406" scare | HTTP 406 from :3141 is the SSE transport talking; the server is UP |
 | Claiming a push happened | `git log origin/main -1` vs local; a push with no gh auth/SSH will fail loudly |
+| **Quizzing on untaught ground** | Drill asks about a concept not yet taught (e.g. btrfs subvolumes, sticky bit) → legitimate student pushback. **Teach first, then test.** Before every drill, ask: "did I teach every fact this question needs?" |
+| **Assuming a tool/reference exists** | `man 7 hier` fails — the `man-pages` package isn't installed on Omarchy (only per-package pages). Verify before instructing: `man -w 7 hier`. Installing it is itself a valid M0.1 package-management task |
+| **Teaching `/tmp` folk-wisdom** | Don't say "/tmp is always cleared on reboot" or "/tmp is always on disk" — CHECK: `findmnt /tmp` (on Omarchy it's tmpfs + `nosuid,nodev`) and `systemd-tmpfiles --cat-config`. Verify the host before stating a default |
+| **Explaining PATH from a tool shell** | The Hermes tool shell has extra PATH entries (venv at #3) that may be *inherited env*, not rc config. Test the student's own shell AND check `grep -rn venv ~/.bashrc /usr/share/omarchy/default/bash/env-bootstrap`; `VIRTUAL_ENV` unset + no rc hit = inherited from the parent process, not configured |
 
 ## Version history
 | Version | Changes |
 |---|---|
+| v1.5.0 | **Curriculum v2.0 Pareto/Interview-First (2026-09-13):** tiers 🔴/🟡/⚪, Stages A–E parallelised (~7 wk at 25–30 hrs/wk vs 28 serial), non-interview topics demoted/cut with documented reasoning, Phase 7 expanded, `INTERVIEW-DRILLS.md` (122 Qs) added, **M0.1 teaching ladder** (teach-before-test) + Chennai market layer |
 | v1.4.0 | **OS migration Windows → Omarchy/Arch (2026-09-13).** All paths moved to `~/Ai-assisted-learning` + `~/Documents/Obsidian/Mira Bootcamp`; dashboard script v1.4.0 (auto ROOT_PATH, stdlib-only); AWS CLI v2 installed natively without sudo; Anki MCP + AnkiConnect re-verified on Linux; Arch tooling notes in RESOURCES.md; gh auth pending |
 | v1.3.0 | Anki SRS (Phase 0 + Phase 5), completion criteria +cards+note, dashboard closure (Rule 14), hardcoded paths for this machine |
 | v1.2.0 | Original kit protocol (Learn→Do→Prove→Defend) |

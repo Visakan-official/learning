@@ -5,7 +5,7 @@ A strict, evidence-only, AI-taught AWS + DevOps bootcamp. One student (Visakan),
 > Built on Learn → Do → Prove → Defend → **Recall**, powered by Anki spaced repetition, an Obsidian vault, a NotebookLM study notebook, and a live GitHub Pages progress dashboard.
 >
 > **v2.0 principle:** we go deep only where interviewers actually go deep. Everything else is *awareness* — explainable in two sentences, no lab hours. See [What we cut and demoted](ROADMAP.md#3-what-we-cut-and-demoted-explicit--no-silent-drops-rule-3).
-> **v2.0 pacing:** 25–30 hrs/week → **~7 weeks**. 30+ → ~5.5 weeks. 20 → ~9 weeks.
+> **AGREED SPRINT (2026-09-13): 4 WEEKS** at 8–10 hrs/day → interview-ready **Sat 10 Oct 2026**. Day-by-day plan: [`SPRINT-4WEEK.md`](SPRINT-4WEEK.md). (The 7/9/16-week options in ROADMAP §1 remain the fallback if the sprint slips — Rule 3: re-plan explicitly, never silently.)
 
 ## The system (v2.0)
 
@@ -13,6 +13,7 @@ A strict, evidence-only, AI-taught AWS + DevOps bootcamp. One student (Visakan),
 |---|---|---|
 | 📋 **ROADMAP.md** | Curriculum v2.0 — 8 phases, 🔴/🟡/⚪ tiers, checkbox-per-topic. Current module = first unchecked box | `ROADMAP.md` |
 | 🎤 **INTERVIEW-DRILLS.md** | **122 scenario questions** — the bank that decides the offer. Answered cold, out loud, twice | `INTERVIEW-DRILLS.md` |
+| ⏱️ **SPRINT-4WEEK.md** | **THE LIVE SCHEDULE** — 4-week sprint (Sep 14 → Oct 11, 2026), day-by-day modules, themes, proofs, milestones | `SPRINT-4WEEK.md` |
 | ⚖️ **RULES.md** | The contract between Mira and Visakan (14 rules) | `RULES.md` |
 | 🧭 **STATUS.txt** | Live resume pointer — current module, next action. Updated after every topic | `STATUS.txt` |
 | 📊 **PROGRESS.md** | Session log + status table (scores, dates) | `PROGRESS.md` |

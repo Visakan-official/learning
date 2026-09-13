@@ -3,7 +3,10 @@
 # Never rely on chat memory — the files are the memory.
 
 LAST UPDATED : 2026-09-13 (ROADMAP → **v2.0 PARETO / INTERVIEW-FIRST** — Chennai 1–2 yr DevOps market)
-CURRICULUM   : v2.0 · tiers 🔴 CORE / 🟡 WORKING / ⚪ AWARENESS · pace 25–30 hrs/wk → ~7 weeks
+CURRICULUM   : v2.0 · tiers 🔴 CORE / 🟡 WORKING / ⚪ AWARENESS
+SPRINT       : **4 WEEKS** — `SPRINT-4WEEK.md` (agreed 2026-09-13) · 8–10 hrs/day · 6 days + light Sunday
+                D1 = Mon 14 Sep 2026 · interview-ready **Sat 10 Oct 2026** · 26 working days + 2 buffer
+                WEEK 1 now · Day 1 = finish M0.1 permissions drill (T1–T4) + logs/services + processes
 CURRENT STAGE: A — Interview floor
 CURRENT PHASE: 0 — Foundations
 CURRENT MODULE: M0.1 — Linux Fundamentals 🔴 (IN PROGRESS)

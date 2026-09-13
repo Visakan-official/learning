@@ -1,291 +1,343 @@
-# AWS + DevOps Bootcamp — ROADMAP (v1.3.0)
+# AWS + DevOps Bootcamp — ROADMAP **v2.0 (PARETO / INTERVIEW-FIRST)**
 
-**Target role:** 1–2 year experienced DevOps Engineer (India market)
-**Pacing assumption:** ~10–12 hrs/week → **~5–6 months total** (compressible if you grind)
-**Status legend:** `[ ]` = not started · `[~]` = in progress · `[x]` = COMPLETE (quiz ≥80% + lab + defend + **Anki cards** + Obsidian note)
-**Anki legend:** 🗂️ = deck tag for this module's flashcards (`mira::<phase>/<module>`). Every module ends with **Phase 5 — Recall: 5+ cards created.**
-
----
-
-## PHASE 0 — Foundations (Weeks 1–3) · *no AWS yet, this is the base*
-
-### M0.1 Linux Fundamentals — *the #1 skill interviewers probe*
-- [ ] Filesystem layout, navigation, file ops (`ls`, `find`, `cp`, `mv`, `ln`)
-- [ ] Permissions & ownership (chmod/chown, umask, setuid/setgid/sticky), users/groups
-- [ ] Processes: ps, top/htop, kill, signals, jobs, nohup, systemd (units, journalctl)
-- [ ] Text tools: grep, sed, awk, sort, uniq, cut, wc, xargs, pipes & redirection
-- [ ] Network tools: curl, wget, ss/netstat, ping, dig/nslookup, nc
-- [ ] Package management (**pacman/AUR** on Arch; know apt/yum conceptually for interviews), cron & systemd timers, environment variables
-- [ ] **Bash scripting:** variables, conditionals, loops, functions, exit codes, error handling
-- [ ] **Lab 0.1:** Write a production-style backup script (log rotation + notify on failure), commit to journal
-- [ ] **Lab 0.2:** Linux troubleshooting drill — you're handed a broken box, you diagnose it
-- [ ] **Quiz 0.1 ≥80%** + Defend: 10 interview Qs
-- [ ] **Recall:** 5+ Anki cards 🗂️ `mira::0-foundations/linux` · Obsidian note
-- 🗂️ **Deck:** `mira::0-foundations/linux`
-
-### M0.2 Networking Basics
-- [ ] OSI model (focus 4/7), TCP vs UDP, ports, 3-way handshake
-- [ ] IP addressing, subnets/CIDR basics, private vs public IPs, NAT concept
-- [ ] DNS: resolution flow, record types (A, AAAA, CNAME, MX, TXT, NS), dig drills
-- [ ] HTTP/HTTPS: methods, status codes (1xx–5xx), headers, cookies, TLS handshake
-- [ ] Proxies, reverse proxies, load balancer concept (why LB? health checks?)
-- [ ] **Quiz 0.2 ≥80%**
-- [ ] **Recall:** 5+ Anki cards 🗂️ `mira::0-foundations/networking` · Obsidian note
-
-### M0.3 Git & GitHub — *daily tool, embarrassing to be weak at*
-- [ ] Repos, commits, staging, `.gitignore`, diff, log, blame
-- [ ] Branching: create/merge/delete, merge vs rebase, conflict resolution
-- [ ] undo: checkout, revert, reset (soft/mixed/hard), stash, cherry-pick
-- [ ] Remotes: fetch/pull/push, tags, releases
-- [ ] GitHub workflow: fork → branch → PR → review → merge; conventional commits
-- [ ] **Lab 0.3:** Restructure THIS repo via a feature branch + PR (practice on real work)
-- [ ] **Quiz 0.3 ≥80%**
-- [ ] **Recall:** 5+ Anki cards 🗂️ `mira::0-foundations/git` · Obsidian note
-
-✅ **Milestone 1 (end of Phase 0):** Mock interview #1 — Linux + Networking + Git (30 min, strict)
+**Target role:** DevOps Engineer, **1–2 years experienced**, Chennai / South-India market
+**Goal:** clear *any* interview loop for that band, in the **shortest defensible time**.
+**Method (unchanged):** Learn → Do → Prove → Defend → **Recall**
+**Tiers:** 🔴 CORE (deep, quiz ≥80% + defend + 5 cards + note) · 🟡 WORKING (usable + explainable, short quiz) · ⚪ AWARENESS (2-sentence answer + 2–3 cards, no lab)
+**Anki legend:** 🗂️ = deck tag `mira::<phase>/<module>` — every 🔴 module ends with **5+ cards created**.
 
 ---
 
-## PHASE 1 — AWS Core (Weeks 4–8)
+## 0. The Pareto decision — what actually gets asked
 
-### M1.1 IAM — *security foundation, huge in interviews*
-- [ ] Users, groups, roles, policies (JSON), policy evaluation logic
-- [ ] Least privilege, MFA, access keys best practices, trust policies
-- [ ] **Lab:** Create admin user, MFA, billing alarm, AWS CLI + credentials, s3 bucket policy
+| Interview theme | Share of loop time | Tier | Why |
+|---|---|---|---|
+| Linux + shell + **troubleshooting** | ~25% | 🔴 | Gates the interview. "Disk full, service down, port in use" scenarios |
+| Docker + **Kubernetes** | ~25% | 🔴 | The single most-demanded skill; K8s troubleshooting > K8s theory |
+| AWS core (EC2/VPC/S3/IAM/ALB/ASG/RDS/CloudWatch/R53) | ~20% | 🔴 | Eight services cover ~90% of questions |
+| CI/CD — **Jenkins + GitHub Actions** | ~10% | 🔴 | Chennai enterprises still interview Jenkins; startups interview Actions |
+| Terraform | ~10% | 🔴 | Standard IaC answer. State/lock/import are the real questions |
+| Prometheus/Grafana + logging concepts | ~5% | 🟡 | Asked as "how do you know it broke?" |
+| Project deep-dive + behaviourals | ~5% of questions, **~100% of the decision** | 🔴 | "Walk me through your project, then tell me what broke" |
+| Ansible · CloudFormation · ArgoCD · service mesh · tracing · ECS/EKS deep · ELK · Vault · Chef/Puppet | remainder | ⚪ | Namedrops must land; labs are not worth the hours |
+
+**Rule v2.0:** we do not go deep where interviewers don't. Every 🔴 module is justified by a question that *will* be asked.
+
+---
+
+## 1. Timeline (pick your hours — this is the whole plan)
+
+| Your pace | Duration | Finish if we start today |
+|---|---|---|
+| 30+ hrs/week (aggressive) | **~5.5 weeks** | ~20 Oct 2026 |
+| **25–30 hrs/week (recommended)** | **~7 weeks** | ~1 Nov 2026 |
+| 20 hrs/week | ~9 weeks | ~15 Nov 2026 |
+| 10–12 hrs/week (original plan) | ~16 weeks | ~Jan 2027 |
+
+Daily shape at 25–30 hrs/wk: **~2.5 h hands-on lab + 1 h teach/quiz + 30 min Anki (Phase 0) + 15 min journal/closure.** Weekends: one project block. **Anki is non-negotiable daily — it's 30 min that saves a week.**
+
+---
+
+## 2. Execution stages (the real order — phases below are the *taxonomy*)
+
+| Stage | Weeks | Content | Exit proof |
+|---|---|---|---|
+| **A — Interview floor** | 1 | Linux interview-core (M0.1), networking trim (M0.2), Git (M0.3), Docker fundamentals (M2.1) | You can get around a box, explain DNS/HTTP/LB, branch/merge/PR, build+run a container |
+| **B — Cloud + containers** | 2–4 | AWS core M1.1–M1.6 (parallel with Docker M2.1–M2.3), Terraform core M3.1 | **P1 shipped**, **P2 shipped**, VPC designed on paper + built |
+| **C — Orchestration + pipelines** | 4–6 | K8s M2.4–M2.5, Helm M2.6, CI/CD M4.1–M4.3 | Pod deployed to K3s, Jenkinsfile + GH Actions pipeline green |
+| **D — IaC depth + flagship** | 6–7 | Terraform state M3.2, ⚪ M3.3–M3.4, GitOps ⚪ M4.4 | **P3 shipped** (Terraform + K3s + monitoring) |
+| **E — Ops polish + interview bootcamp** | 7–8 | Observability M5.1–M5.3, Security/cost M6.2–M6.4, **expanded Phase 7** | 100 interview questions drilled, 3 project stories, 2 mock interviews passed |
+
+Cost discipline still applies every single session (Phase 6 = destroy). Lab ceiling: stay in free tier + ~$5 for a short EKS/K3s experiment.
+
+---
+
+## PHASE 0 — Foundations · **compressed to the interview-critical subset**
+
+### M0.1 Linux Fundamentals 🔴 — *the #1 skill interviewers probe*
+- [ ] FHS + storage layers in practice (`lsblk`, `findmnt`, subvolumes, `man 7 hier`)
+- [ ] **Permissions from zero**: uid/gid/groups → 3 triads → r/w/x on files **vs directories** → octal → `chmod` (both syntaxes) → `chown`/`chgrp` → `umask` → setuid/setgid/sticky → `stat`/`namei`
+- [ ] Navigation + file ops under time pressure (`ls/find/du/df/stat`), symlinks vs hardlinks
+- [ ] **Logs & services**: `journalctl -u`, `systemctl status/restart/enable`, `/var/log`, log rotation
+- [ ] **Processes**: `ps/top/htop`, `kill` & signals, `nohup`/`&`/`jobs`, `lsof`, `ss -tulpn`
+- [ ] **Troubleshooting drills (interview format)**: disk full · high CPU/mem · service won't start · port already in use · permission denied · can't reach a host
+- [ ] Text tools: `grep/sed/awk/cut/sort/uniq/wc/xargs`, pipes + redirection
+- [ ] Package management (**pacman/AUR**; apt/yum conceptually), cron + systemd timers, env vars
+- [ ] **Bash scripting 🟡**: variables, conditionals, loops, functions, exit codes, `set -euo pipefail`
+- [ ] **Lab 0.1:** production-style backup script (log rotation + failure alert) → `journal/`
+- [ ] **Lab 0.2:** broken-box diagnosis — I break it, you find it, in <15 min
+- [ ] **Quiz 0.1 ≥80% + Defend** · **Recall:** 5+ cards 🗂️ `mira::0-foundations/linux`
+
+### M0.2 Networking Basics 🔴 — *trimmed to what's tested*
+- [ ] OSI in 60 s + TCP vs UDP, ports, 3-way handshake, TLS handshake outline
+- [ ] IP/CIDR, public vs private, NAT, **subnet math you can do in your head** (VPC prep)
+- [ ] DNS end-to-end: resolution flow, A/AAAA/CNAME/MX/TXT/NS, TTL, `dig`/`nslookup`
+- [ ] HTTP/S: methods, status codes, headers, cookies
+- [ ] Reverse proxy vs load balancer, L4 vs L7, health checks
+- [ ] 🔴 **"What happens when I type a URL and press Enter?"** — the classic opener, answer in 90 s
+- [ ] **Quiz 0.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::0-foundations/networking`
+
+### M0.3 Git & GitHub 🔴 — *daily tool, embarrassing to be weak at*
+- [ ] Repos, staging, commits, `.gitignore`, `diff`, `log`, `blame`, conventional commits
+- [ ] Branch/merge/rebase, conflict resolution, `stash`, `cherry-pick`, tags + releases
+- [ ] Undo: `checkout`, `restore`, `revert` vs `reset --soft/--mixed/--hard` (what each does to history)
+- [ ] Remotes, `fetch` vs `pull`, PR workflow (branch → PR → review → merge)
+- [ ] **Lab 0.3:** restructure THIS repo through a feature branch + PR
+- [ ] **Quiz 0.3 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::0-foundations/git`
+
+---
+
+## PHASE 1 — AWS Core (the 8 services that carry the interview)
+
+### M1.1 IAM 🔴 — *always the first security question*
+- [ ] Users/groups/roles/policies; **groups for permissions, users for identity**
+- [ ] Policy JSON: Effect/Action/Resource/Condition; managed vs inline; least privilege
+- [ ] Roles vs access keys; instance profiles; **why root keys are banned**
+- [ ] MFA, password policy, credential reports, Access Analyzer
 - [ ] **Quiz 1.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/iam`
 
-### M1.2 EC2 + EBS — *bread and butter*
-- [ ] AMIs, instance types & families, pricing models (on-demand, reserved, spot)
-- [ ] Key pairs, security groups (stateful, default rules), user-data scripts
-- [ ] EBS: volumes, snapshots, AMI creation, instance store vs EBS, gp3/io1
-- [ ] **Lab:** Launch hardened web server via user-data, snapshot + restore drill
+### M1.2 EC2 + EBS 🔴 — *bread and butter*
+- [ ] Instances, types (t/burstable vs m/c/r families), AMIs, key pairs, user data
+- [ ] EBS types (gp3/io2/st1), snapshots, AMI from snapshot, encryption
+- [ ] Security groups vs NACLs (stateful vs stateless — guaranteed question)
+- [ ] Spot/reserved/savings plans; **instance metadata & IMDSv2**
+- [ ] SSH access patterns, bastion vs SSM Session Manager
 - [ ] **Quiz 1.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/ec2-ebs`
 
-### M1.3 VPC — *the #1 AWS interview killer, master it*
-- [ ] CIDR design, subnets (public/private), route tables, IGW, NAT gateway/instance
-- [ ] Security groups vs NACLs (stateless vs stateful — exam favourite), VPC peering, endpoints, bastion hosts
-- [ ] **Lab:** Build a full VPC: 2 AZs, public+private subnets, NAT, ALB in public, app in private, RDS in db subnet — ALL from console first, then documented
-- [ ] **Quiz 1.3 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::1-aws/vpc`
+### M1.3 VPC 🔴 — *the #1 AWS interview killer*
+- [ ] VPC, subnets (public/private), IGW, NAT GW, route tables, NACLs
+- [ ] CIDR planning by hand; AZs; VPC peering + endpoints (gateway/interface)
+- [ ] **Design drill:** 3-tier VPC on paper → defend every route and SG rule
+- [ ] Build it live (Terraform in Stage B), then destroy (Phase 6)
+- [ ] **Quiz 1.3 ≥80% + Defend** · **Recall:** 5+ cards 🗂️ `mira::1-aws/vpc`
 
-### M1.4 S3 — *most-used service, cheapest interview points*
-- [ ] Buckets, objects, keys, storage classes, lifecycle policies, versioning
-- [ ] Static website hosting, CORS, presigned URLs, S3 vs EBS vs EFS
-- [ ] Security: bucket policies, ACLs vs policies, encryption (SSE-S3/KMS), MFA delete
-- [ ] **Lab:** Static site on S3 + versioning + lifecycle + presigned URL script
+### M1.4 S3 🔴 — *most-asked service, cheapest points*
+- [ ] Buckets, objects, keys, storage classes, versioning, lifecycle, replication
+- [ ] Policies vs ACLs vs block-public-access; presigned URLs; static hosting
+- [ ] Encryption (SSE-S3/KMS/SSE-C), Object Lock basics; CloudFront in front
 - [ ] **Quiz 1.4 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/s3`
 
-### M1.5 ELB + ASG + Route 53
-- [ ] ALB vs NLB vs CLB, target groups, listeners, health checks, stickiness
-- [ ] ASG: launch templates, scaling policies, cooldowns, lifecycle hooks
-- [ ] Route 53: hosted zones, routing policies (simple, weighted, latency, failover), alias vs CNAME
-- [ ] **Lab:** ALB + ASG serving a stress-testable app; simulate AZ failure, watch it recover
+### M1.5 ELB + ASG + Route 53 🔴
+- [ ] ALB vs NLB vs GWLB; target groups, listeners, health checks, sticky sessions
+- [ ] Launch templates + ASG: min/max/desired, scaling policies, cooldown, lifecycle hooks
+- [ ] Route 53: hosted zones, A/CNAME/alias, routing policies (weighted, latency, failover), TTLs
 - [ ] **Quiz 1.5 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/elb-asg-r53`
 
-### M1.6 RDS + DynamoDB + CloudWatch
-- [ ] RDS: engines, Multi-AZ, read replicas, backups, parameter groups, aurora mention
-- [ ] DynamoDB: tables, partition keys, RCU/WCU vs on-demand, indexes (GSI/LSI), DAX mention
-- [ ] CloudWatch: metrics, alarms, logs, log groups, agent, unified agent
-- [ ] **Lab:** RDS + app connecting via SG rules; CloudWatch alarm that pages you
+### M1.6 RDS + DynamoDB ⚪ + CloudWatch 🔴
+- [ ] RDS: engines, Multi-AZ vs read replicas (the classic distinction), backups/PITR, snapshots
+- [ ] CloudWatch: **metrics vs logs vs alarms**, Log Insights queries, dashboards, alarm → SNS
+- [ ] SNS vs SQS, EventBridge outline; **billing metrics live only in us-east-1**
+- [ ] ⚪ DynamoDB: PK/SK, on-demand vs provisioned, when NoSQL vs RDS
 - [ ] **Quiz 1.6 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/rds-ddb-cw`
 
-### M1.7 Serverless Foundations
-- [ ] Lambda: runtime, triggers, layers, env vars, timeout/memory, cold starts, IAM role
-- [ ] API Gateway: REST vs HTTP, stages, throttling
-- [ ] EventBridge, SQS/SNS basics
-- [ ] **Lab:** "Image resize on upload" — S3 → Lambda → S3, plus EventBridge cron Lambda
-- [ ] **Quiz 1.7 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::1-aws/serverless`
+### M1.7 Serverless ⚪ — *awareness only*
+- [ ] Lambda (handler, timeout, cold starts, IAM role), API Gateway, when NOT to use serverless
+- [ ] **Recall:** 3 cards 🗂️ `mira::1-aws/serverless`
 
-✅ **Milestone 2 (end of Phase 1):** Mock interview #2 — AWS deep-dive (45 min, strict) + **Project P1**
-
-### 📦 PROJECT P1 (resume piece #1): Static site on S3 + CloudFront + Route 53 + CI/CD
-Static portfolio site, custom domain, HTTPS, GitHub Actions deploy on push, versioned S3.
+### 📦 PROJECT P1 (Shipped end of Stage B): Static site → S3 + CloudFront + Route 53 + GitHub Actions
+**Interview value:** DNS + CDN + IAM least privilege + a real CI/CD pipeline + cost story (free tier).
 
 ---
 
-## PHASE 2 — Containers: Docker + Kubernetes (Weeks 8–13) *the heart of modern DevOps*
+## PHASE 2 — Containers: Docker + Kubernetes 🔴 *(the heart of the loop)*
 
-### M2.1 Docker Fundamentals
-- [ ] Images vs containers vs layers; Dockerfile (FROM, RUN, COPY, CMD, ENTRYPOINT, EXPOSE)
-- [ ] Image build cache, multi-stage builds, .dockerignore
-- [ ] run/exec/ps/logs/rm/rmi, port publishing, env vars, healthchecks
-- [ ] **Lab:** Containerize a real app (node or python) with multi-stage build, run it, inspect it
+### M2.1 Docker Fundamentals 🔴
+- [ ] Why containers vs VMs; images/layers/union-FS; registry pull flow
+- [ ] `build/run/exec/logs/inspect/ps/rm/rmi`, port mapping, env vars, entrypoint vs cmd
+- [ ] **Dockerfile craft**: layer caching order, multi-stage builds, `.dockerignore`, slim/distroless
+- [ ] Debugging: container exits instantly, exec into a broken container, log-less failures
 - [ ] **Quiz 2.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/docker`
 
-### M2.2 Volumes, Networks, Compose
-- [ ] Named volumes vs bind mounts, tmpfs
-- [ ] Bridge vs host vs none networks, container-to-container DNS
-- [ ] Docker Compose: services, networks, volumes, depends_on, env files, profiles
-- [ ] **Lab:** Full-stack compose: app + postgres + redis + nginx reverse proxy, all wired
+### M2.2 Volumes, Networks, Compose 🔴
+- [ ] Named volumes vs bind mounts vs tmpfs; **data loss on `docker rm`** drill
+- [ ] Bridge/host/none/overlay; container DNS by service name; published ports vs internal
+- [ ] Compose: services, depends_on/healthcheck, env files, profiles, `up -d`/`logs`/`down -v`
 - [ ] **Quiz 2.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/compose`
 
-### M2.3 Registries & Image Security
-- [ ] Docker Hub, ECR (AWS), tagging, `docker login`, pull policies
-- [ ] Image scanning (Trivy), distroless/scratch, least-privilege users in images
-- [ ] **Lab:** Push to ECR from local, scan images, fix high-CVEs
+### M2.3 Registries & Image Security 🟡
+- [ ] ECR: repos, auth, tags vs digests, lifecycle policies, scanning
+- [ ] Image hygiene: minimal base, non-root user, no secrets in layers, SBOM/Trivy outline
 - [ ] **Quiz 2.3 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/registries`
 
-### M2.4 Kubernetes Core — *the biggest interview topic of all*
-- [ ] Architecture: control plane (API server, etcd, scheduler, controller manager) vs nodes (kubelet, kube-proxy, container runtime)
-- [ ] Pods, ReplicaSets, Deployments (rolling updates, rollbacks, strategy types)
-- [ ] Services (ClusterIP, NodePort, LoadBalancer), Endpoints, DNS
-- [ ] ConfigMaps & Secrets, namespaces, labels & selectors
-- [ ] **Lab:** Deploy app on minikube/K3s: Deployment + Service + ConfigMap + Secret, scale it, roll it back
-- [ ] **Quiz 2.4 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/k8s-core`
+### M2.4 Kubernetes Core 🔴 — *the biggest interview topic of all*
+- [ ] Architecture: control plane (API server, etcd, scheduler, controller-manager) vs kubelet/kube-proxy/CRI
+- [ ] Pods, ReplicaSets, Deployments, rollout/rollback, DaemonSet/StatefulSet/Job outline
+- [ ] Services (ClusterIP/NodePort/LB) + **Ingress**, ConfigMap/Secret, Namespaces, resource requests/limits
+- [ ] Probes (liveness/readiness/startup) — why readiness ≠ liveness
+- [ ] **Troubleshooting drills 🔴**: CrashLoopBackOff · ImagePullBackOff · Pending (resources/taints) · OOMKilled · Service has no endpoints · DNS inside the cluster
+- [ ] **Quiz 2.4 ≥80% + Defend** · **Recall:** 5+ cards 🗂️ `mira::2-containers/k8s-core`
 
-### M2.5 K8s Intermediate
-- [ ] Ingress & Ingress controllers (nginx), TLS
-- [ ] Storage: PV/PVC, storage classes
-- [ ] Probes: liveness/readiness/startup; resource requests/limits; HPA
-- [ ] kubectl power: get/describe/logs/exec/port-forward/apply vs create, `-o yaml`, `--dry-run`
-- [ ] Troubleshooting drill: crashloop, image pull backoff, pending pods, node not ready
-- [ ] **Lab:** nginx-ingress + cert, HPA under load (hey/wrk), survive a node drain
-- [ ] **Quiz 2.5 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::2-containers/k8s-intermediate`
+### M2.5 K8s Intermediate 🟡
+- [ ] Storage: PV/PVC/StorageClass, emptyDir vs PVC, StatefulSet + headless service
+- [ ] Scheduling: nodeSelector/affinity/taints+tolerations, HPA + metrics-server
+- [ ] RBAC + ServiceAccounts, NetworkPolicy, Jobs/CronJobs, RollingUpdate vs Recreate strategy
+- [ ] **Quiz 2.5 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/k8s-intermediate`
 
-### M2.6 Helm
-- [ ] Charts, values, templates, release lifecycle (upgrade/rollback), repo add/install
-- [ ] **Lab:** Deploy app via Helm chart, override values, rollback
+### M2.6 Helm 🟡
+- [ ] Chart anatomy (Chart.yaml/values/templates), `helm install/upgrade/rollback/history`, values override order
+- [ ] Templating essentials (`{{ }}`, `--set`, `.Values`, `_helpers.tpl` outline)
+- [ ] ⚪ Operator/CRD concept in 2 sentences
 - [ ] **Quiz 2.6 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::2-containers/helm`
 
-✅ **Milestone 3 (end of Phase 2):** Mock interview #3 — Docker+K8s (45 min, strict) + **Project P2**
-
-### 📦 PROJECT P2 (resume piece #2): Dockerized full-stack app + compose + ECR pipeline
-Complete local compose stack → CI build + scan → push ECR.
+### 📦 PROJECT P2 (Shipped end of Stage B/C): Dockerized 3-tier app → ECR → EC2 + Compose → Jenkins pipeline
+**Interview value:** multi-container Compose, volumes, healthchecks, image registry pipeline, deployment script, rollback.
 
 ---
 
-## PHASE 3 — Infrastructure as Code (Weeks 13–16)
+## PHASE 3 — Infrastructure as Code
 
-### M3.1 Terraform Core
-- [ ] HCL syntax, providers, resources, data sources, variables, outputs, locals
-- [ ] `init / plan / apply / destroy` lifecycle, state file & state locking
-- [ ] **Lab:** Rebuild your Phase-1 VPC with Terraform (this is the skill interviewers demand)
+### M3.1 Terraform Core 🔴
+- [ ] HCL: providers, resources, variables, outputs, locals, data sources, `plan/apply/destroy`
+- [ ] `for_each` vs `count`, depends_on, implicit vs explicit dependency graph
+- [ ] **Lab:** build the M1.3 VPC 100% in code, then destroy
 - [ ] **Quiz 3.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::3-iac/terraform-core`
 
-### M3.2 Terraform State & Remote Backends
-- [ ] Why remote state, S3 backend + DynamoDB locking, state commands, `terraform import`
-- [ ] Workspaces, modules (input/output), functions, `for_each` vs `count`
-- [ ] **Lab:** Remote state with locking, extract a reusable VPC module, destroy everything cleanly
-- [ ] **Quiz 3.2 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::3-iac/terraform-state`
+### M3.2 Terraform State & Remote Backends 🔴
+- [ ] Why state exists, what's in it, why it must not be committed or shared loose
+- [ ] S3 + DynamoDB locking backend; workspaces; `import`, `state mv/rm`, drift + refresh
+- [ ] Modules: inputs/outputs, when a module earns its keep; `terraform fmt/validate/tflint` outline
+- [ ] **Quiz 3.2 ≥80% + Defend** · **Recall:** 5+ cards 🗂️ `mira::3-iac/terraform-state`
 
-### M3.3 Ansible (config management awareness)
-- [ ] Inventory, playbooks, modules, handlers, roles; ad-hoc commands
-- [ ] **Lab:** Configure EC2 instances with Ansible (nginx + app deploy), idempotency proof
-- [ ] **Quiz 3.3 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::3-iac/ansible`
+### M3.3 Ansible ⚪ — *be able to talk about it*
+- [ ] Agentless model, inventory, playbook/role structure, idempotency; **Ansible vs Terraform** in one answer
+- [ ] One tiny playbook run against localhost (no big lab)
+- [ ] **Recall:** 3 cards 🗂️ `mira::3-iac/ansible`
 
-### M3.4 CloudFormation (awareness, interview mentions)
-- [ ] Template anatomy, stack lifecycle; Terraform vs CloudFormation comparison (interview classic)
-- [ ] **Quiz 3.4 ≥80%** (short) · **Recall:** 3+ cards 🗂️ `mira::3-iac/cloudformation`
+### M3.4 CloudFormation / CDK ⚪
+- [ ] Stacks, templates, drift, why AWS shops still use it; TF vs CFN trade-off answer
+- [ ] **Recall:** 3 cards 🗂️ `mira::3-iac/cloudformation`
 
-✅ **Milestone 4:** Mock interview #4 — IaC (30 min) + **Project P3**
-
-### 📦 PROJECT P3 (resume piece #3): 3-tier app on AWS, 100% Terraform
-VPC (2 AZ) + ALB + ASG + RDS + S3 + secrets, modules, remote state. This is the project that lands interviews.
+### 📦 PROJECT P3 (flagship, shipped end of Stage D): 3-tier app on AWS, 100% Terraform + K3s + monitoring
+**Interview value:** VPC/SG/ALB/EC2/RDS provisioned as code, K8s workload deployed, Prometheus + Grafana, blue-green or canary cutover, cost teardown story.
 
 ---
 
-## PHASE 4 — CI/CD (Weeks 16–19)
+## PHASE 4 — CI/CD 🔴
 
-### M4.1 CI/CD Concepts
-- [ ] CI vs CD vs CDE; pipeline stages; artifacts; environments (dev/stage/prod); gating
-- [ ] **Quiz 4.1 ≥80%** (short, conceptual) · **Recall:** 3+ cards 🗂️ `mira::4-cicd/concepts`
+### M4.1 CI/CD Concepts 🔴
+- [ ] CI vs CD vs CD(deploy); build→test→scan→push→deploy; artifacts vs images; environments
+- [ ] **Deployment strategies 🔴**: rolling, blue-green, canary, recreate — trade-offs (guaranteed question)
+- [ ] Rollback thinking; feature flags; trunk-based vs gitflow (opinion + why)
+- [ ] **Quiz 4.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::4-cicd/concepts`
 
-### M4.2 GitHub Actions — *deep, this is your primary tool*
-- [ ] Workflows: events, jobs, steps, runners, matrix, caching, artifacts, environments
-- [ ] Secrets & variables, OIDC to AWS (no long-lived keys!), concurrency, reusable workflows
-- [ ] **Lab:** CI (lint→test→build→scan→push ECR) + CD (deploy to EC2/ECS) with OIDC
+### M4.2 GitHub Actions 🔴
+- [ ] Workflow anatomy: on/jobs/steps/runners, matrix builds, caching, artifacts, environments + approvals
+- [ ] Secrets/OIDC **keyless AWS auth** (no long-lived keys in CI), reusable workflows outline
+- [ ] **Lab:** full pipeline — lint → test → build → push to ECR → deploy → smoke test
 - [ ] **Quiz 4.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::4-cicd/gh-actions`
 
-### M4.3 Jenkins (legacy awareness — still in 60% of job ads)
-- [ ] Pipeline as code (declarative), agents, stages, plugins, credentials
-- [ ] **Lab:** Same pipeline in Jenkins against a local agent
-- [ ] **Quiz 4.3 ≥80%** (awareness level) · **Recall:** 3+ cards 🗂️ `mira::4-cicd/jenkins`
+### M4.3 Jenkins 🟡 (still in ~60% of Chennai JDs)
+- [ ] Architecture: controller vs agents, executors, plugins, credentials store
+- [ ] Freestyle vs **declarative Pipeline**; `Jenkinsfile` stages/steps/agent/post; parameters
+- [ ] Shared libraries + multibranch concept (⚪); `Jenkinsfile` vs GH Actions comparison answer
+- [ ] **Lab:** same P2 pipeline expressed as a `Jenkinsfile`
+- [ ] **Quiz 4.3 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::4-cicd/jenkins`
 
-### M4.4 GitOps with ArgoCD
-- [ ] GitOps principles, ArgoCD app of apps, sync policies, drift detection
-- [ ] **Lab:** ArgoCD on minikube: app deploys from Git, revert = git revert
-- [ ] **Quiz 4.4 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::4-cicd/gitops`
-
-✅ **Milestone 5:** Mock interview #5 — CI/CD + GitOps (40 min, strict) + **Project P4**
-
-### 📦 PROJECT P4 (resume piece #4): Full CI/CD + GitOps pipeline
-GitHub Actions (OIDC) → ECR → ArgoCD/ECS deploy, blue/green or canary, rollback drill.
+### M4.4 GitOps / ArgoCD ⚪
+- [ ] Git as source of truth, pull vs push deployment, sync/drift/self-heal, ArgoCD vs Flux in a sentence
+- [ ] **Recall:** 3 cards 🗂️ `mira::4-cicd/gitops`
 
 ---
 
-## PHASE 5 — Observability (Weeks 19–21)
+## PHASE 5 — Observability 🟡
 
-### M5.1 Prometheus + Grafana
-- [ ] Metrics model, exporters, service discovery, PromQL basics, alerting (Alertmanager)
-- [ ] Grafana dashboards, data sources, annotations
-- [ ] **Lab:** Monitor the Phase-2 cluster: node/app metrics, custom dashboard, alert fires
+### M5.1 Prometheus + Grafana 🔴 *(asked as "how do you know it broke?")*
+- [ ] Pull model, exporters (node_exporter), scrape configs, PromQL basics (rate/increase/sum by), alert rules → Alertmanager
+- [ ] Grafana: data sources, dashboards, **USE/RED method** for what to chart
 - [ ] **Quiz 5.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::5-observability/prometheus`
 
-### M5.2 Logging
-- [ ] Log aggregation concepts; ELK/OpenSearch (ingest, index, search) or Loki; EFK on k8s
-- [ ] AWS: CloudWatch Logs, Log Insights, S3 log archival
-- [ ] **Lab:** Centralize app logs, search them, alert on error pattern
+### M5.2 Logging 🟡
+- [ ] `journald` + Docker/K8s log flow, structured (JSON) logging, log levels, retention/cost
+- [ ] ⚪ ELK/Loki architecture in 2 sentences; CloudWatch Logs + metric filters
 - [ ] **Quiz 5.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::5-observability/logging`
 
-### M5.3 Tracing & SLOs (awareness)
-- [ ] Distributed tracing (Jaeger/Tempo), OpenTelemetry, golden signals, SLI/SLO/SLA
-- [ ] **Quiz 5.3 ≥80%** (short) · **Recall:** 3+ cards 🗂️ `mira::5-observability/tracing`
-
-✅ **Milestone 6:** Mock interview #6 — Observability (30 min)
+### M5.3 SLI/SLO + incident response ⚪→🟡
+- [ ] SLI/SLO/error budget in one answer; MTTR mindset; on-call runbook + postmortem structure
+- [ ] **Recall:** 3 cards 🗂️ `mira::5-observability/tracing`
 
 ---
 
-## PHASE 6 — Advanced AWS + Security + Cost (Weeks 21–24)
+## PHASE 6 — Advanced AWS + Security + Cost
 
-### M6.1 ECS & EKS on AWS
-- [ ] ECS: task definitions, Fargate vs EC2, service autoscaling, ECS vs EKS decision
-- [ ] EKS: managed control plane, node groups, IAM roles for pods, spot nodes
-- [ ] **Lab:** Deploy containerized app to ECS Fargate with ALB; repeat on EKS (minikube skills transfer)
+### M6.1 ECS & EKS ⚪→🟡
+- [ ] ECS: task definitions, services, Fargate vs EC2 launch type — comparison-ready
+- [ ] EKS: what AWS manages vs what you do, node groups, IRSA outline; **K3s is our lab** (cost), EKS optional short lab
 - [ ] **Quiz 6.1 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/ecs-eks`
 
-### M6.2 Secrets & Security
-- [ ] AWS Secrets Manager vs SSM Parameter Store, KMS (CMK vs AWS-managed)
-- [ ] DevSecOps: SAST (Semgrep/SonarQube), dependency scan (OWASP), container scan (Trivy) in pipeline, SBOM
+### M6.2 Secrets & Security 🔴
+- [ ] Secrets Manager vs SSM Parameter Store vs env vars; rotation; never-in-git discipline
+- [ ] Least-privilege IAM review, S3 bucket hardening, SG hygiene, GuardDuty/CloudTrail outline
+- [ ] SSH key hygiene (0600), TLS certs (ACM), VPC endpoints for private access
 - [ ] **Quiz 6.2 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/security`
 
-### M6.3 Well-Architected + Cost Optimization
-- [ ] 6 pillars (operational excellence, security, reliability, performance, cost, sustainability)
-- [ ] Cost: savings plans, spot, rightsizing, S3 lifecycle, billing alerts; FinOps basics
-- [ ] **Quiz 6.3 ≥80%** + Defend · **Recall:** 5+ cards 🗂️ `mira::6-advanced/cost`
+### M6.3 Well-Architected + Cost 🔴
+- [ ] The 6 pillars in one line each; cost levers: right-sizing, graviton, spot, S3 lifecycle, scheduling, free tier traps
+- [ ] **Lab:** Cost Explorer + Budgets + alarm review → one written cost-optimisation recommendation
+- [ ] **Quiz 6.3 ≥80% + Defend** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/cost`
 
-### M6.4 Systems Design & Migration (interview gold)
-- [ ] Design a scalable app architecture on AWS (diagram + reasoning: VPC, multi-AZ, ASG, caching, CDN, DB tier)
-- [ ] Migration patterns (lift-and-shift, re-platform, re-architect)
+### M6.4 Systems Design & Migration 🔴
+- [ ] Design a scalable 3-tier app on AWS (VPC, multi-AZ, ASG, ALB, RDS, cache, CDN) — whiteboard + defend
+- [ ] Design a multi-region/DR answer (RTO/RPO), lift-shift vs re-platform vs re-architect
+- [ ] Containerise-and-deploy an existing app: the migration story interviewers love
 - [ ] **Quiz 6.4 ≥80%** · **Recall:** 5+ cards 🗂️ `mira::6-advanced/design`
 
-✅ **Milestone 7:** Mock interview #7 — Full scenario design (45 min, whiteboard-style)
+---
+
+## PHASE 7 — INTERVIEW BOOTCAMP 🔴 *(expanded — this is where the offer is won)*
+
+- [ ] **Rapid-fire bank:** 100+ scenario questions from `INTERVIEW-DRILLS.md`, gap-free, twice through
+- [ ] **Project storytelling:** each of P1/P2/P3 told in 3 min (problem → design → build → breakage → fix → result) + 4 pre-loaded follow-up answers
+- [ ] **Break/fix mocks:** I break an EC2/K8s/CI pipeline live; you diagnose under time pressure (5 rounds)
+- [ ] **Whiteboard drills:** 3-tier VPC · CI/CD flow · K8s request path · blue-green vs canary (4 rounds)
+- [ ] **Behaviourals:** "tell me about a failure", "conflict in a team", "tight deadline" — 3 STAR stories rehearsed
+- [ ] **Resume + LinkedIn + GitHub polish:** outcome-first bullets, quantified, mapped to the JD
+- [ ] **Full mock loop ×2:** screen → technical → scenario → manager round, graded by me
+- [ ] **Salary + negotiation script** for the Chennai band; notice/bond questions answered professionally
+- [ ] **Defend:** "why should we hire you over someone with 2 years?" — 60 s, no filler
 
 ---
 
-## PHASE 7 — Interview Bootcamp (Weeks 24–28)
+## 3. What we CUT and DEMOTED (explicit — no silent drops, Rule 3)
 
-- [ ] **Question bank:** 200+ questions across ALL modules — drilled via spaced repetition (Anki) until 90%+ hit rate
-- [ ] **Mock interviews:** 5 full-length mocks (45 min each): Linux/git, Docker/K8s, AWS, CI/CD+IaC, mixed senior panel
-- [ ] **Scenario rounds:** "Your app is slow / down / leaking secrets — what do you do?" diagnosis drills
-- [ ] **Behavioral:** STAR answers, "tell me about a time you broke prod", ownership stories (use real journal/project incidents)
-- [ ] **Resume + portfolio:** finalize 4 projects with READMEs, diagrams, and a live demo URL
-- [ ] **Salary/negotiation prep:** local/remote market rates for 1–2 yr DevOps
-- [ ] **Capstone review:** full walkthrough of every project, every decision defended
+| Item | v1.3.0 | v2.0 | Reasoning | Risk if asked |
+|---|---|---|---|---|
+| Ansible | full module | ⚪ awareness + tiny localhost playbook | Rarely probed beyond "what is it / vs Terraform" at 1–2 yr | Cover in one 20-min session before an interview that names it |
+| CloudFormation | quiz + cards | ⚪ awareness | AWS-only shops ask it conceptually | 1-line comparison answer exists |
+| ArgoCD/GitOps | module + lab | ⚪ awareness | Asked as a concept; lab hours buy little at this band | You can still explain pull-based deploy |
+| ECS/EKS labs | module depth | ⚪→🟡 concepts, **K3s as the lab** | EKS control-plane cost + duplicates K8s learning | Same K8s questions; EKS specifics = 5 cards |
+| Observability depth | 3 modules | 🟡 Prometheus/Grafana real, rest ⚪ | Alerts/dashboards are asked; tracing/SLO rarely | SLI/SLO answer rehearsed in Phase 7 |
+| Serverless | module + lab | ⚪ | Out of scope for most JD-s in this band | 3 cards |
+| DynamoDB depth | module | ⚪ | Rarely deep for DevOps | Comparison answer |
+| Deep bash (arrays/traps) | partial | 🟡 only what scripts need | Interviews ask short scripts, not bash golf | Scripting drills in Phase 7 |
+| BGP/VLAN/OSPF deep networking | partial | **cut** | Cloud-networking roles ask it; DevOps-in-Chennai doesn't | Say "routing beyond AWS I'm learning" honestly |
+| Chef/Puppet/Vault/service mesh | mentioned | **cut** | Legacy/over-scoped for this band | One-line awareness |
+| 4th project | 4 projects | **3 projects** | 3 deep stories beat 4 shallow ones | Coverage preserved via P3 |
+| Deep Terraform module libraries | module | 🟡 modules + `state mv/import` | State questions are the real filter | Modules asked as "have you built one" — you will have |
 
-✅ **Graduation:** "I certify the student as interview-ready for 1–2 yr experienced DevOps roles."
-
----
-
-## The 4 Portfolio Projects (resume pieces)
-
-| # | Project | Tech | When |
-|---|---|---|---|
-| P1 | Static site: S3 + CloudFront + Route53 + CI/CD | AWS, GH Actions | End Phase 1 |
-| P2 | Full-stack app dockerized + ECR pipeline | Docker, Compose, ECR | End Phase 2 |
-| P3 | 3-tier app on AWS, 100% Terraform | Terraform, AWS | End Phase 3 |
-| P4 | Full CI/CD + GitOps (OIDC → ECR → ArgoCD) | GH Actions, ArgoCD, EKS/ECS | End Phase 4 |
-
-Every project gets: working code, README with architecture diagram, deployment runbook, and a "what I'd improve" section. That last part is what makes interviewers lean in.
+**Sequencing change (the biggest time win):** v1.3.0 ran phases strictly serially (Weeks 1–28). v2.0 **parallelises**: AWS + Docker + Terraform move together in Stage B, and CI/CD is taught *through* projects, not as a theory block. Same coverage of 🔴 items, ~60% of the calendar.
 
 ---
 
-*v1.3.0: added Anki Recall checkpoints (5+ cards/module), deck naming convention, and completion criteria alignment with the Recall phase.*
+## 4. The 3 Portfolio Projects (resume pieces)
+
+| # | Project | Stack | Ships | Interview value |
+|---|---|---|---|---|
+| P1 | Static site, prod-grade | S3 + CloudFront + Route 53 + ACM + **GitHub Actions** | End Stage B | DNS/CDN/IAM/OIDC + pipeline + cost story |
+| P2 | Dockerized 3-tier app | Docker + Compose + ECR + EC2 + **Jenkins** | End Stage C | Multi-container, volumes, healthchecks, image pipeline, rollback |
+| P3 | AWS infra as code + K8s + monitoring | **Terraform** + VPC/ALB/ASG/RDS + **K3s** + Helm + Prometheus/Grafana + blue-green | End Stage D | The flagship: everything a 1–2 yr JD lists, in one repo |
+
+Each project = code + README (architecture diagram, runbook, "what I'd improve") + a 3-min spoken story. **A project you can't explain does not exist.**
+
+---
+
+## 5. Chennai market layer (why the tiers look like this)
+
+- **Who's hiring around you:** GCCs & product cos (Zoho, Freshworks, PayPal, Walmart, Ford, Comcast, Athenahealth, Amazon) + service cos (TCS, Infosys, Cognizant, HCL, Wipro, LTIMindtree) + product startups. GCC/product loops probe **K8s + Terraform + Linux troubleshooting**; service cos probe **Jenkins + AWS + shell scripting** + communication. v2.0 targets the union.
+- **Typical loop:** screening → 1–2 technical rounds (heavy scenario + "explain your project") → sometimes a live break/fix or a small script → managerial round (attitude, shifts/on-call, notice period) → HR.
+- **Recurring Chennai-specific questions:** disk-full triage · "pod is in CrashLoopBackOff, go" · write a shell script to check a service and alert · Jenkins pipeline vs Jenkinsfile · how do you deploy without downtime · VPC design for 3 tiers · IAM least privilege · what do you do when prod goes down at 2 AM.
+- **Band:** roughly ₹4.5–9 LPA for 1–2 yrs (product GCCs at the top). Your leverage at this band is **demonstrable lab + project proof**, not years — which is exactly what this repo produces.
+- **Truth to hold onto:** no course "clears any interview". What clears interviews is being able to answer *this* bank cold, defend your projects, and stay calm in break/fix. That's Phase 7, and it's why Phase 7 is now the largest phase in v2.0.
+
+---
+
+*ROADMAP v2.0 (2026-09-13) — Pareto restructure for the Chennai 1–2 yr DevOps market. Supersedes v1.3.0. Changes logged in `PROGRESS.md` + `journal/2026-09-13.md`.*

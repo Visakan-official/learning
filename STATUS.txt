@@ -2,14 +2,26 @@
 # Updated by Mira after EVERY topic. Read FIRST at session start.
 # Never rely on chat memory — the files are the memory.
 
-LAST UPDATED : 2026-09-13 (HOST MIGRATION Windows → Omarchy/Arch — Day 0 carried over)
+LAST UPDATED : 2026-09-13 (ROADMAP → **v2.0 PARETO / INTERVIEW-FIRST** — Chennai 1–2 yr DevOps market)
+CURRICULUM   : v2.0 · tiers 🔴 CORE / 🟡 WORKING / ⚪ AWARENESS · pace 25–30 hrs/wk → ~7 weeks
+CURRENT STAGE: A — Interview floor
 CURRENT PHASE: 0 — Foundations
-CURRENT MODULE: M0.1 — Linux Fundamentals
-CURRENT TOPIC : (none yet — next session starts M0.1)
-NEXT ACTION   : Phase 0 Anki review (7 due in mira::0-foundations/day0) → then M0.1 Linux:
-                filesystem layout, navigation, file ops (ls, find, cp, mv, ln) + permissions
-PENDING       : none — gh auth login ✓ (Visakan-official, keyring/HTTPS) · push verified (387e0a1 on origin/main)
-BLOCKERS      : none — Anki MCP (:3141) ✓, AnkiConnect (:8765) ✓, AWS CLI v2 ✓ (sts → visakan-admin)
+CURRENT MODULE: M0.1 — Linux Fundamentals 🔴 (IN PROGRESS)
+CURRENT TOPIC : Permissions from zero (r/w/x triads · files vs dirs · octal · chmod/chown/umask · setuid/setgid/sticky)
+
+NEXT ACTION   : Finish the M0.1 permissions drill — T1 identity+modes, T2 directory-write deletion
+                experiment, T3 chmod three ways + umask, T4 sticky + setuid audit. Paste raw output.
+                THEN: M0.1 remaining boxes (logs/services, processes, troubleshooting drills, text tools,
+                package mgmt, bash 🟡, Lab 0.1 backup script, Lab 0.2 broken-box) → Quiz 0.1 ≥80% + Defend.
+PENDING       : 2 open Qs in question-bank.md (billing region precision · t3.small consequence) — re-ask
+                until twice clean · Obsidian restart to confirm AnkiSync+ on the Mira Bootcamp vault
+BLOCKERS      : none — Anki MCP (:3141) ✓ · AnkiConnect (:8765) ✓ · AWS CLI ✓ (visakan-admin) · gh auth ✓
+
+# --- v2.0 WHAT CHANGED (full detail in ROADMAP.md §3) ---
+Demoted to ⚪: Ansible · CloudFormation · ArgoCD/GitOps · ECS/EKS depth · serverless · DynamoDB · deep ELK
+Cut: BGP/VLAN-depth · Chef/Puppet/Vault/service-mesh · 4th project (3 deep > 4 shallow)
+Expanded: K8s troubleshooting drills · CI/CD via projects · Phase 7 interview bootcamp (largest phase)
+Parallelised: AWS + Docker + Terraform run together (Stage B) — was strictly serial in v1.3.0
 
 # --- HOST (v1.4.0, since 2026-09-13) ---
 HOST          : Omarchy 4.0.2 (Arch-based Linux) · user vizack · home /home/vizack

@@ -126,7 +126,7 @@ Videos are for concepts you can't grok from text. Don't binge — learn, then DO
 | Obsidian | Vault at `~/Documents/Obsidian/Mira Bootcamp`, plugin `anki-sync-plus` |
 | Repo | `~/Ai-assisted-learning` → `github.com/Visakan-official/learning` (public), dashboard → GitHub Pages `docs/` |
 
-## Tools you'll install (timeline)
+## Tools you'll install (timeline — **v2.0 stages**)
 | Week | Tool | Why |
 |---|---|---|
 | Day 0 | Omarchy 4.0.2 (Arch-based Linux) | Native Linux lab host — migrated off Windows 2026-09-13 |
@@ -134,8 +134,9 @@ Videos are for concepts you can't grok from text. Don't binge — learn, then DO
 | Day 0 | Editor (VS Code / Neovim / Zed) | Whatever you'll actually live in on Arch |
 | Day 0 | Anki + AnkiConnect + Anki MCP add-on | SRS (already done ✅) |
 | Day 0 | Obsidian + AnkiSync+ plugin | Vault + card bridge |
-| Phase 2 | Docker Engine + Compose (`pacman -S docker docker-compose`) | Containers, native Linux |
-| Phase 2 | minikube or K3s (native Linux) | K8s lab |
-| Phase 3 | Terraform, Ansible | IaC |
-| Phase 4 | Jenkins (local), ArgoCD (in cluster) | CI/CD |
-| Phase 5 | Prometheus, Grafana, Loki/OpenSearch | Observability |
+| Stage A | Docker Engine + Compose (`pacman -S docker docker-compose`) | Containers, native Linux |
+| Stage C | **K3s** (native Arch, single node) | K8s lab — cheaper and faster than EKS; EKS stays ⚪ awareness |
+| Stage B/D | **Terraform** 🔴 (official binary → `~/.local/bin`), **Ansible** ⚪ (one localhost playbook) | IaC |
+| Stage C/D | **Jenkins** 🟡 (local + `Jenkinsfile`), **GitHub Actions** 🔴, ArgoCD ⚪ | CI/CD |
+| Stage E | **Prometheus + Grafana + node_exporter** 🔴-lite, Loki/ELK ⚪ | Observability |
+| Phase 7 | `INTERVIEW-DRILLS.md` — 122 scenario Qs, drilled **weekly** not saved for the end | The offer |
